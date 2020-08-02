@@ -19,6 +19,7 @@ app.use("/api", api);
 config.env === "development" &&
   mongoose.connect(
     `mongodb://${config.database.development.host}/${config.database.development.name}`,
+    //`mongodb://localhost/twitter`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -29,7 +30,8 @@ config.env === "development" &&
   );
 config.env === "production" &&
   mongoose.connect(
-    `mongodb+srv://${config.database.production.user}:${config.database.production.password}@${config.database.production.host}/${config.database.development.name}`,
+   //`mongodb+srv://${config.database.production.user}:${config.database.production.password}@${config.database.production.host}/${config.database.development.name}`,
+   `mongodb://localhost/twitter`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -38,6 +40,8 @@ config.env === "production" &&
       console.log("Conectado a la base de datos");
     }
   );
+
+  //console.log("Conectdo a: " + config.env);
 
 const server = app.listen(
   config.server.port,
