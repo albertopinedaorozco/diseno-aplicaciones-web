@@ -29,8 +29,6 @@ const newUser = (req, res) => {
     const salt = bcrypt.genSaltSync(saltRounds);
     const password = bcrypt.hashSync(req.body.password, salt);
 
-    console.log('antes de  la funcion new User')
-
     const birthdate = req.body.birthdate;//crypto.encrypt();    
     
 
