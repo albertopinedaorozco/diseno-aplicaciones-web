@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('./../../models/users');
+const Tweet = require('./../../models/tweets');
 const crypto = require('./../../functions/crypto');
 const config = require('./../../../config');
 
@@ -95,4 +96,12 @@ const loginUser = (req, res) => {
     });
 };
 
-module.exports = {getUser, newUser, updateUser, deleteUser, loginUser, getUsers};
+const listUserTweets = (req, res) => {  
+    Tweet.find({user: req.params.id})
+        .populate('user', ['username','name'])
+        .populate('comments.user',['username','name'])
+        .then((response) => res.send(response))
+        .catch((err) => res.status(404).send(err));
+  };
+
+module.exports = {getUser, newUser, updateUser, deleteUser, loginUser, getUsers, listUserTweets};
